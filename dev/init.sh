@@ -6,7 +6,7 @@ echo "--------------------------------------------------------------------------
 cp .env.conf .env
 echo "...complete..."
 echo "------------------------------------------------------------------------------"
-echo "setting storate and bootsrap/cache permissions..."
+echo "setting storage and bootsrap/cache permissions..."
 echo "------------------------------------------------------------------------------"
 sudo chgrp -R www-data ../storage ../bootstrap/cache
 sudo chmod -R ug+rwx ../storage ../bootstrap/cache
