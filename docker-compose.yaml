@@ -1,0 +1,37 @@
+# Dev docker-compose environment for FFPS
+
+version: "3.6"
+services:
+    laravel:
+        build:
+            context: ${LARAVEL_CODEBASE_DIR}
+            dockerfile: dev-dockerfile
+        container_name: ffps_laravel
+        working_dir: /var/www
+        volumes:
+            - ${LARAVEL_CODEBASE_DIR}:/var/www
+        networks:
+            - dev
+        ports:
+            - ${LARAVEL_HOST_PORT}:80
+
+    mysql:
+        container_name: ffps_mysql
+        image: mysql
+        environment:
+            - "MYSQL_DATABASE=${DB_DATABASE}"
+            - "MYSQL_USER=${DB_USERNAME}"
+            - "MYSQL_PASSWORD=${DB_PASSWORD}"
+            - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - dev
+        ports:
+            - ${MYSQL_HOST_PORT}:3306
+
+networks:
+    dev:
+
+volumes:
+    dbdata:
